@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- ==============================
+         Projets (Campagnes de tests)
+    =============================== -->
+    <record id="demo_test_project_alpha" model="test.project">
+        <field name="name">Campagne Alpha</field>
+        <field name="responsible_id" ref="base.user_admin"/>
+        <field name="state">2_active</field>
+        <field name="description">Campagne de test pour la version Alpha du produit.</field>
+    </record>
+
+    <record id="demo_test_project_beta" model="test.project">
+        <field name="name">Campagne Beta</field>
+        <field name="responsible_id" ref="base.user_demo"/>
+        <field name="state">1_draft</field>
+        <field name="description">Campagne de test pour la version Beta avec fonctionnalités avancées.</field>
+    </record>
+
+    <!-- ==============================
+         Cas de test
+    =============================== -->
+    <record id="demo_test_case_login" model="test.case">
+        <field name="name">Connexion utilisateur</field>
+        <field name="priority">medium</field>
+        <field name="status">2_ready</field>
+        <field name="project_id" ref="demo_test_project_alpha"/>
+    </record>
+
+    <record id="demo_test_case_register" model="test.case">
+        <field name="name">Inscription utilisateur</field>
+        <field name="priority">low</field>
+        <field name="status">1_draft</field>
+        <field name="project_id" ref="demo_test_project_alpha"/>
+    </record>
+
+    <record id="demo_test_case_report" model="test.case">
+        <field name="name">Génération de rapport</field>
+        <field name="priority">high</field>
+        <field name="status">2_ready</field>
+        <field name="project_id" ref="demo_test_project_beta"/>
+    </record>
+
+    <!-- ==============================
+         Steps (étapes des cas de tests)
+    =============================== -->
+    <record id="demo_test_step_login_1" model="test.step">
+        <field name="action">Accéder à la page de login</field>
+        <field name="expected_result">La page s'affiche correctement</field>
+        <field name="case_id" ref="demo_test_case_login"/>
+    </record>
+
+    <record id="demo_test_step_login_2" model="test.step">
+        <field name="action">Saisir identifiants valides</field>
+        <field name="expected_result">L'utilisateur est redirigé vers le tableau de bord</field>
+        <field name="case_id" ref="demo_test_case_login"/>
+    </record>
+
+    <record id="demo_test_step_register_1" model="test.step">
+        <field name="action">Remplir formulaire d'inscription</field>
+        <field name="expected_result">Formulaire soumis avec succès</field>
+        <field name="case_id" ref="demo_test_case_register"/>
+    </record>
+
+    <!-- ==============================
+         Exécutions
+    =============================== -->
+    <record id="demo_test_execution_alpha_day1" model="test.execution">
+        <field name="name">Alpha - Exécution Jour 1</field>
+        <field name="tester_id" ref="base.user_demo"/>
+        <field name="status">4_done</field>
+        <field name="project_id" ref="demo_test_project_alpha"/>
+    </record>
+
+    <record id="demo_test_execution_alpha_day2" model="test.execution">
+        <field name="name">Alpha - Exécution Jour 2</field>
+        <field name="tester_id" ref="base.user_admin"/>
+        <field name="status">3_failed</field>
+        <field name="project_id" ref="demo_test_project_alpha"/>
+    </record>
+
+    <record id="demo_test_execution_beta_day1" model="test.execution">
+        <field name="name">Beta - Exécution initiale</field>
+        <field name="tester_id" ref="base.user_demo"/>
+        <field name="status">2_in_progress</field>
+        <field name="project_id" ref="demo_test_project_beta"/>
+    </record>
+
+    <!-- ==============================
+         Historique
+    =============================== -->
+    <record id="demo_test_history_login_day1" model="test.case.history">
+        <field name="case_id" ref="demo_test_case_login"/>
+        <field name="expected_snapshot">success</field>
+        <field name="version">1</field>
+        <field name="user_id" ref="base.user_demo"/>
+    </record>
+
+    <record id="demo_test_history_login_day2" model="test.case.history">
+        <field name="case_id" ref="demo_test_case_login"/>
+        <field name="expected_snapshot">failed</field>
+        <field name="version">2</field>
+        <field name="user_id" ref="base.user_demo"/>
+    </record>
+
+    <record id="demo_test_history_register_day2" model="test.case.history">
+        <field name="case_id" ref="demo_test_case_register"/>
+        <field name="expected_snapshot">failed</field>
+        <field name="version">1</field>
+        <field name="user_id" ref="base.user_demo"/>
+    </record>
+
+    <record id="demo_test_history_report_beta" model="test.case.history">
+        <field name="case_id" ref="demo_test_case_report"/>
+        <field name="expected_snapshot">in_progress</field>
+        <field name="version">1</field>
+        <field name="user_id" ref="base.user_demo"/>
+    </record>
+</odoo>

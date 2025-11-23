@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_api_endpoint_form" model="ir.ui.view">
+        <field name="name">api.endpoint.form</field>
+        <field name="model">api.endpoint</field>
+        <field name="arch" type="xml">
+            <form string="API Endpoint">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="title"/>
+                            <field name="description"/>
+                            <field name="method"/>
+                            <field name="summary"/>
+                        </group>
+                        <group>
+                            <field name="version"/>
+                            <field name="security"/>
+                            <field name="url"/> 
+                            <field name="tags"/> 
+                        </group>
+                        <group>
+                            <field name="model_id"/>  
+                        </group>
+                    </group>
+                    <group name="params" string="Paramètre d'API">
+                        <field name="params_ids" nolabel="1">
+                            <list
+                                editable="bottom"
+                            >
+                                <field name="name"/>
+                                <field name="in_"/>
+                                <field name="schema_type"/>
+                                <field name="required"/>
+                            </list>
+                        </field>
+                    </group>
+                    <group>
+                        <notebook>
+                            <page string="Code">
+                                <field name="code" widget="code" options="{'mode': 'python'}"/>
+                            </page>
+                             <page string="Help">
+                                <p>The following variables can be used:</p>
+                                <ul>
+                                    <li><code>env</code>: environment on which the action is triggered</li>
+                                    <li><code>model</code>: model of the record on which the action is triggered; is a void recordset</li>
+                                    <li><code>record</code>: record on which the action is triggered; may be be void</li>
+                                    <li><code>records</code>: recordset of all records on which the action is triggered in multi mode; may be void</li>
+                                    <li><code>time</code>, <code>datetime</code>, <code>dateutil</code>, <code>timezone</code>: useful Python libraries</li>
+                                    <li><code>float_compare()</code>: utility function to compare floats based on a specific precision</li>
+                                    <li><code>log(message, level='info')</code>: logging function to record debug information in <code>ir.logging</code> table</li>
+                                    <li><code>_logger.info(message)</code>: logger to emit messages in server logs</li>
+                                    <li><code>UserError</code>: exception class for raising user-facing warning messages</li>
+                                    <li><code>Command</code>: x2many commands namespace</li>
+                                    <li><code>params</code>: Dictionary of path parameters extracted from URL. Values are already converted according to their type (e.g., int). Example: {'id': 42}</li>
+                                    <li><code>query</code>: Dictionary of query parameters (?page=2&amp;status=done) extracted from request.params. Example: {'page': '2', 'status': 'done'}</li>
+                                    <li><code>headers</code>: Dictionary of HTTP headers in the request (request.httprequest.headers). Example: {'Authorization': 'Bearer &lt;token&gt;'}</li>
+                                    <li><code>body</code>: JSON body of the POST or PUT request, already decoded into a Python dictionary. Empty ({}) if no body was provided.</li>
+                                    <li>To return an action, assign: <code>action = {...}</code></li>
+                                    <li>To notify progress for CRON call and re-trigger a call if there is remaining tasks, use <code>env['ir.cron']._notify_progress(done=task_done_count, remaining=task_remaining_count)</code></li>
+                                </ul>
+                                <div >
+                                    <p>Example of Python code:</p>
+<pre style='white-space: pre-wrap'>partner_name = record.name + '_code'
+env['res.partner'].create({'name': partner_name})
+    </pre>
+                                </div>
+                            </page>
+                            <page string="Réponse">
+                                <group>
+                                    <field name="response_ids" nolabel="1">
+                                        <list>
+                                            <field name="status_code"/>
+                                        </list>
+                                        <form>
+                                            <group>
+                                                <group>
+                                                    <field name="status_code"/>
+                                                </group>
+                                                <group>
+                                                    <field name="content_type"/>
+                                                </group>
+                                            </group>
+                                            <group >
+                                                <field name="description"/>
+                                            </group>
+                                            <group>
+                                                <group string="Exemple response">
+                                                     <field name="example_response" nolabel="1"/>
+                                                </group>
+                                                <group string="schéma">
+                                                    <field name="schema" nolabel="1"/> 
+                                                </group>
+                                            </group>
+                                        </form>
+                                    </field> 
+                                </group>
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_api_endpoint_tree" model="ir.ui.view">
+        <field name="name">api.endpoint.tree</field>
+        <field name="model">api.endpoint</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="title"/>
+                <field name="method"/>
+                <field name="url"/>
+                <field name="security"/>
+            </list>
+        </field>
+    </record>
+</odoo>
+

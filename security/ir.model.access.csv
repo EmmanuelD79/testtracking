@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_test_project_user,access_test_project_user,model_test_project,base.group_user,1,1,1,0
+access_test_case_user,access_test_case_user,model_test_case,base.group_user,1,1,1,0
+access_test_step_user,access_test_step_user,model_test_step,base.group_user,1,1,1,0
+access_test_execution_user,access_test_execution_user,model_test_execution,base.group_user,1,1,1,0
+access_test_execution_line_user,access_test_execution_line_user,model_test_execution_line,base.group_user,1,1,1,0
+access_test_bug_user,access_test_bug_user,model_test_bug,base.group_user,1,1,1,0
+access_test_case_history_user,access_test_case_history_user,model_test_case_history,base.group_user,1,1,1,0
+access_api_endpoint_user,access_api_endpoint_user,model_api_endpoint,base.group_user,1,1,1,0
+access_api_endpoint_response_user,access_api_endpoint_response_user,model_api_endpoint_response,base.group_user,1,1,1,0
+access_api_endpoint_param_user,access_api_endpoint_param_user,model_api_endpoint_param,base.group_user,1,1,1,0
+access_test_execution_line_step_user,access_test_execution_line_step_user,model_test_execution_line_step,base.group_user,1,1,1,0
+access_test_recipe_report_config,test.recipe.report.config,model_test_recipe_report_config,base.group_user,1,1,1,1
+access_test_recipe_print_wizard,test.recipe.print.wizard,model_test_recipe_print_wizard,base.group_user,1,0,1,0

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Action : Campagnes de tests -->
+    <record id="action_test_project" model="ir.actions.act_window">
+        <field name="name">Campagnes de tests</field>
+        <field name="res_model">test.project</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créez votre première campagne de tests.
+            </p>
+        </field>
+    </record>
+
+    <!-- Action : Cas de tests -->
+    <record id="action_test_case" model="ir.actions.act_window">
+        <field name="name">Cas de tests</field>
+        <field name="res_model">test.case</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Ajoutez vos premiers cas de tests fonctionnels.
+            </p>
+        </field>
+        <field name="search_view_id" ref="view_test_case_search"/>
+        <field name="context">{'group_by':'project_id'}</field>
+    </record>
+
+    <!-- Action : Exécutions -->
+    <record id="action_test_execution" model="ir.actions.act_window">
+        <field name="name">Exécutions</field>
+        <field name="res_model">test.execution</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Lancez vos premières exécutions de campagnes.
+            </p>
+        </field>
+        <field name="search_view_id" ref="view_test_execution_search"/>
+        <field name="context">{'group_by':'project_id'}</field>
+    </record>
+    
+    <!-- Action : API Endpoint -->
+    <record id="action_api_endpoint" model="ir.actions.act_window">
+        <field name="name">API</field>
+        <field name="res_model">api.endpoint</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créez votre premier endpoint de votre API.
+            </p>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_test_bug" model="ir.actions.act_window">
+        <field name="name">Bugs</field>
+        <field name="res_model">test.bug</field>
+        <field name="view_mode">kanban,list,form,pivot,graph</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Aucun bug signalé pour le moment.
+            </p>
+        </field>
+    </record>
+    
+    <!-- Action spécifique : graph des résultats -->
+    <record id="action_test_execution_line_graph" model="ir.actions.act_window">
+        <field name="name">Résultats des Cas de Test</field>
+        <field name="res_model">test.execution.line</field>
+        <field name="view_mode">graph,pivot,list</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Visualisez la répartition des résultats des cas de tests par statut 
+                (Succès, Échec, Bloqué, Non exécuté).
+            </p>
+        </field>
+    </record>
+
+    <record id="action_recipe_report_config" model="ir.actions.act_window">
+        <field name="name">Configurations PV de recette</field>
+        <field name="res_model">test.recipe.report.config</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <act_window 
+        id="action_print_recipe_pv_wizard"
+        name="Imprimer PV de Recette"
+        res_model="test.recipe.print.wizard"
+        view_mode="form"
+        target="new"
+        context="{'default_config_id': ref('test_tracking.default_recipe_config')}"
+        binding_model="test.execution"
+        binding_type="report"/>
+
+</odoo>

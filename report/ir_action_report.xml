@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="report_test_recipe_pv" model="ir.actions.report">
+        <field name="name">PV de Recette</field>
+        <field name="model">test.execution</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">TestTracking.report_test_recipe_pv_document</field>
+        <field name="report_file">report.TestTracking.report_test_recipe_pv_document</field>
+        <field name="print_report_name">'PV Recette - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="model_test_execution"/>
+        <field name="binding_type">report</field>
+        <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+</odoo>
+
+

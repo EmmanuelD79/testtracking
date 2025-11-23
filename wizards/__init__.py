@@ -1,0 +1,1 @@
+from . import test_recipe_print_wizard

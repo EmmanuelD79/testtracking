@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Vue liste : Campagnes -->
+    <record id="view_test_project_tree" model="ir.ui.view">
+        <field name="name">test.project.tree</field>
+        <field name="model">test.project</field>
+        <field name="arch" type="xml">
+            <list string="Campagnes de tests">
+                <field name="name"/>
+                <field name="responsible_id"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_test_project_kanban" model="ir.ui.view">
+        <field name="name">test.project.kanban</field>
+        <field name="model">test.project</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state" class="o_kanban_test_project" kanban_draggable="true">
+                <field name="name"/>
+                <field name="state"/>
+                <field name="responsible_id"/>
+                <field name="test_case_ids"/>
+                <field name="execution_ids"/>
+                <field name="execution_count"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click oe_kanban_card o_kanban_{{ record.state.raw_value }}">
+                                <div class="o_kanban_details">
+                                    <strong><field name="name"/></strong>
+                                </div>
+                                <div>
+                                    Responsable : <field name="responsible_id"/>
+                                </div>
+                                <div>
+                                    <span>
+                                        Cas de tests : <t t-esc="record.test_case_ids.raw_value ? record.test_case_ids.raw_value.length : 0"/>
+                                    </span>
+                                </div>
+                                <div>
+                                    <span>
+                                        Exécutions : <t t-esc="record.execution_ids.raw_value ? record.execution_ids.raw_value.length : 0"/>
+                                    </span>
+                                </div>
+                                <div>
+                                    État : <field name="state"/>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+    <!-- Vue formulaire : Campagnes -->
+    <record id="view_test_project_form" model="ir.ui.view">
+        <field name="name">test.project.form</field>
+        <field name="model">test.project</field>
+        <field name="arch" type="xml">
+           
+            <form string="Campagne de tests">
+                <div>
+                    <button name="action_view_cases" type="object" class="oe_stat_button" icon="fa-vials">
+                        <field name="test_case_count" string=" Cas de tests" widget="statinfo"/>
+                    </button>
+                    <button name="action_view_executions" type="object" class="oe_stat_button" icon="fa-play-circle">
+                        <field name="execution_count" string=" Exécutions" widget="statinfo"/>
+                    </button>
+                    <button name="action_view_bug" type="object" class="oe_stat_button" icon="fa-play-circle">
+                        <field name="bug_count" string=" Bug" widget="statinfo"/>
+                    </button>
+                    <button name="action_view_success_rate" type="object" class="oe_stat_button" icon="fa-check-circle">
+                        <field name="success_rate" string=" Taux de succès" widget="statinfo"/>
+                    </button>
+                </div>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="responsible_id"/>
+                        <field name="state"/>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="description"/>
+                        </page>
+                        <page string="Cas de test">
+                            <field name="test_case_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="priority"/>
+                                    <field name="status"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Exécutions">
+                            <field name="execution_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="tester_id"/>
+                                    <field name="status"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Roles">
+                            <group>
+                                <field name="manager_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                                <field name="tester_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

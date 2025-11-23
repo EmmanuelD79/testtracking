@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Déclaration de la catégorie de module -->
+    <record id="module_category_test_tracking" model="ir.module.category">
+        <field name="name">Test Tracking</field>
+        <field name="sequence">20</field>
+    </record>
+
+    <!-- Groupe utilisateur des tests -->
+    <record id="group_test_user" model="res.groups">
+        <field name="name">Test User</field>
+        <field name="category_id" ref="module_category_test_tracking"/>
+    </record>
+
+    <!-- Groupe manager des tests -->
+    <record id="group_test_manager" model="res.groups">
+        <field name="name">Test Manager</field>
+        <field name="implied_ids" eval="[(4, ref('group_test_user'))]"/>
+        <field name="category_id" ref="module_category_test_tracking"/>
+    </record>
+</odoo>

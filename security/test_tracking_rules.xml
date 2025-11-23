@@ -1,0 +1,175 @@
+<odoo>
+    <!-- Règle : les testeurs ne voient que les projets où ils sont testeurs -->
+    <record id="test_project_rule_testers" model="ir.rule">
+        <field name="name">Test Project - Testers</field>
+        <field name="model_id" ref="model_test_project"/>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        <field name="domain_force">[('tester_ids', 'in', [user.id])]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <!-- Règle : les managers ne voient que les projets où ils sont managers -->
+    <record id="test_project_rule_managers" model="ir.rule">
+        <field name="name">Test Project - Managers</field>
+        <field name="model_id" ref="model_test_project"/>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        <field name="domain_force">[
+            '|',
+                ('manager_ids', '=', False),
+                ('manager_ids', 'in', [user.id]),
+            ('tester_ids', 'not in', [user.id])
+        ]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <!-- Règle : les testeurs ne voient que les projets où ils sont testeurs -->
+    <record id="test_case_rule_testers" model="ir.rule">
+        <field name="name">Test Case - Testers</field>
+        <field name="model_id" ref="model_test_case"/>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        <field name="domain_force">[('project_id.tester_ids', 'in', [user.id])]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <!-- Règle : les managers ne voient que les projets où ils sont managers -->
+    <record id="test_case_rule_managers" model="ir.rule">
+        <field name="name">Test Case - Managers</field>
+        <field name="model_id" ref="model_test_case"/>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        <field name="domain_force">[
+            '|',
+                ('project_id.manager_ids', '=', False),
+                ('project_id.manager_ids', 'in', [user.id]),
+            ('project_id.tester_ids', 'not in', [user.id])
+        ]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <!-- Règle : les testeurs ne voient que les projets où ils sont testeurs -->
+    <record id="test_step_rule_testers" model="ir.rule">
+        <field name="name">Test Step - Testers</field>
+        <field name="model_id" ref="model_test_step"/>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        <field name="domain_force">[('case_id.project_id.tester_ids', 'in', [user.id])]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <!-- Règle : les managers ne voient que les projets où ils sont managers -->
+    <record id="test_step_rule_managers" model="ir.rule">
+        <field name="name">Test Step - Managers</field>
+        <field name="model_id" ref="model_test_step"/>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        <field name="domain_force">[
+            '|',
+                ('case_id.project_id.manager_ids', '=', False),
+                ('case_id.project_id.manager_ids', 'in', [user.id]),
+            ('case_id.project_id.tester_ids', 'not in', [user.id])
+        ]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <!-- Règle : les testeurs ne voient que les projets où ils sont testeurs -->
+    <record id="test_execution_rule_testers" model="ir.rule">
+        <field name="name">Test Execution - Testers</field>
+        <field name="model_id" ref="model_test_execution"/>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        <field name="domain_force">[('project_id.tester_ids', 'in', [user.id])]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <!-- Règle : les managers ne voient que les projets où ils sont managers -->
+    <record id="test_executioin_rule_managers" model="ir.rule">
+        <field name="name">Test Execution - Managers</field>
+        <field name="model_id" ref="model_test_execution"/>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        <field name="domain_force">[
+            '|',
+                ('project_id.manager_ids', '=', False),
+                ('project_id.manager_ids', 'in', [user.id]),
+            ('project_id.tester_ids', 'not in', [user.id])
+        ]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <!-- Règle : les testeurs ne voient que les projets où ils sont testeurs -->
+    <record id="test_execution_line_rule_testers" model="ir.rule">
+        <field name="name">Test Execution Line - Testers</field>
+        <field name="model_id" ref="model_test_execution_line"/>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        <field name="domain_force">[('case_id.project_id.tester_ids', 'in', [user.id])]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <!-- Règle : les managers ne voient que les projets où ils sont managers -->
+    <record id="test_execution_line_rule_managers" model="ir.rule">
+        <field name="name">Test Execution Line - Managers</field>
+        <field name="model_id" ref="model_test_execution_line"/>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        <field name="domain_force">[
+            '|',
+                ('case_id.project_id.manager_ids', '=', False),
+                ('case_id.project_id.manager_ids', 'in', [user.id]),
+            ('case_id.project_id.tester_ids', 'not in', [user.id])
+        ]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <!-- Règle : les testeurs ne voient que les projets où ils sont testeurs -->
+    <record id="test_bug_rule_testers" model="ir.rule">
+        <field name="name">Test Bug - Testers</field>
+        <field name="model_id" ref="model_test_bug"/>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        <field name="domain_force">[('project_id.tester_ids', 'in', [user.id])]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <!-- Règle : les managers ne voient que les projets où ils sont managers -->
+    <record id="test_bug_rule_managers" model="ir.rule">
+        <field name="name">Test Bug - Managers</field>
+        <field name="model_id" ref="model_test_bug"/>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        <field name="domain_force">[
+            '|',
+                ('project_id.manager_ids', '=', False),
+                ('project_id.manager_ids', 'in', [user.id]),
+            ('project_id.tester_ids', 'not in', [user.id])
+        ]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+</odoo>

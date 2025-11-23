@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Menu principal -->
+    <menuitem id="menu_test_tracking_root"
+              name="Test Tracking"
+              sequence="10"
+              web_icon="test_tracking,static/description/icon.png"/>
+
+    <!-- Sous-menu Projets / Campagnes -->
+    <menuitem id="menu_test_project"
+              name="Projet de tests"
+              parent="menu_test_tracking_root"
+              sequence="20"/>
+
+    <menuitem id="menu_test_projet_projet"
+              name="Projets de tests"
+              parent="menu_test_project"
+              action="action_test_project"
+              sequence="10"/>
+
+    <!-- Sous-menu Cas de tests -->
+    <menuitem id="menu_test_case"
+              name="Cas de tests"
+              parent="menu_test_project"
+              action="action_test_case"
+              sequence="20"/>
+
+    <!-- Sous-menu Exécutions -->
+    <menuitem id="menu_test_execution"
+              name="Exécutions"
+              parent="menu_test_project"
+              action="action_test_execution"
+              sequence="30"/>
+
+    <menuitem id="menu_test_bug_root"
+              name="Bugs"
+              parent="menu_test_project"
+              action="action_test_bug"
+              sequence="40"/>
+
+    <!-- Sous-menu API -->
+    <menuitem id="menu_configuration"
+              name="Configuration"
+              parent="menu_test_tracking_root"
+              sequence="30"/>
+
+    <menuitem id="menu_api_endpoint"
+              name="API"
+              parent="menu_configuration"
+              action="action_api_endpoint"
+              sequence="10"/>
+    
+    <!-- Menu "Statistiques" -->
+    <menuitem id="menu_test_statistics"
+              name="Statistiques"
+              parent="menu_configuration"
+              sequence="20"
+              action="action_test_execution_line_graph"/>
+      
+    <menuitem id="menu_recipe_report_config"
+            name="Configurations PV de recette"
+            parent="menu_configuration"
+            sequence="30"
+            action="action_recipe_report_config"/>
+ 
+</odoo>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Vue liste : Cas de tests -->
+    <record id="view_test_case_tree" model="ir.ui.view">
+        <field name="name">test.case.tree</field>
+        <field name="model">test.case</field>
+        <field name="arch" type="xml">
+            <list string="Cas de tests">
+                <field name="name"/>
+                <field name="project_id"/>
+                <field name="priority"/>
+                <field name="status"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_test_case_kanban" model="ir.ui.view">
+        <field name="name">test.case.kanban</field>
+        <field name="model">test.case</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="status" class="o_kanban_test_case" kanban_draggable="true">
+                <field name="name"/>
+                <field name="status"/>
+                <field name="priority"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click oe_kanban_card o_kanban_{{ record.status.raw_value }}">
+                            <div class="o_kanban_details">
+                                <strong><field name="name"/></strong>
+                                <div><field name="priority"/></div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_test_case_search" model="ir.ui.view">
+        <field name="name">test.case.search</field>
+        <field name="model">test.case</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="project_id"/>
+                <field name="priority"/>
+                <field name="status"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_by_project"
+                            string="Project"
+                            context="{'group_by':'project_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Vue formulaire : Cas de tests -->
+    <record id="view_test_case_form" model="ir.ui.view">
+        <field name="name">test.case.form</field>
+        <field name="model">test.case</field>
+        <field name="arch" type="xml">
+            <form string="Cas de test">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="project_id"/>
+                        <field name="priority"/>
+                        <field name="status"/>
+                        <field name="version"/>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="description"/>
+                        </page>
+                        <page string="Préconditions">
+                            <field name="preconditions"/>
+                        </page>
+                        <page string="Étapes">
+                            <field name="step_ids">
+                                <list editable="bottom">
+                                    <field name="sequence"/>
+                                    <field name="action"/>
+                                    <field name="expected_result"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Historique">
+                            <field name="history_ids">
+                                <list editable="bottom">
+                                    <field name="version"/>
+                                    <field name="date"/>
+                                    <field name="user_id"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
+

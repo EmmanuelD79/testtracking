@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_recipe_report_config_form" model="ir.ui.view">
+        <field name="name">test.recipe.report.config.form</field>
+        <field name="model">test.recipe.report.config</field>
+        <field name="arch" type="xml">
+            <form string="Configuration du PV de recette">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <group string="Sections à inclure">
+                        <field name="include_header"/>
+                        <field name="include_participants"/>
+                        <field name="include_summary"/>
+                        <field name="include_anomalies"/>
+                        <field name="include_decision"/>
+                        <field name="include_signatures"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_recipe_report_config_tree" model="ir.ui.view">
+        <field name="name">test.recipe.report.config.tree</field>
+        <field name="model">test.recipe.report.config</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="include_header"/>
+                <field name="include_summary"/>
+                <field name="include_anomalies"/>
+                <field name="include_decision"/>
+            </list>
+        </field>
+    </record>
+</odoo>
